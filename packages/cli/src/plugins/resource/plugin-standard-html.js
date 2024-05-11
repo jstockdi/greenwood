@@ -197,7 +197,8 @@ class StandardHtmlResource extends ResourceInterface {
       for (const fm in frontMatter) {
         const interpolatedFrontmatter = '\\$\\{globalThis.page.' + fm + '\\}';
 
-        body = body.replace(new RegExp(interpolatedFrontmatter, 'g'), frontMatter[fm]);
+        const fmString = typeof frontMatter[fm] === 'object' ? JSON.stringify(frontMatter[fm]) : frontMatter[fm];
+        body = body.replace(new RegExp(interpolatedFrontmatter, 'g'), fmString);
       }
     }
 
